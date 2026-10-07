@@ -40,6 +40,6 @@ def fetch_all(names: list[str] | None = None) -> list[dict]:
     for name in names or PACKAGES:
         try:
             rows.append(fetch_package(name))
-        except Exception as e:
+        except (OSError, ValueError, KeyError, http.client.HTTPException) as e:
             print(f"skipped {name}: {e}")
     return rows
